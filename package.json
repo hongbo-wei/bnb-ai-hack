@@ -1,0 +1,22 @@
+{
+  "name": "bnb-ai-hack",
+  "version": "1.0.0",
+  "description": "BNB Hack main track submission for the AI track (DeFi category). This project builds three AI agents and an orchestrator that turn on-chain data into actionable, policy-safe trade intent.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
+    "dotenv": "^17.2.3",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.22.2"
+  }
+}

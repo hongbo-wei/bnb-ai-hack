@@ -7,8 +7,8 @@ BNB Hack main track submission for the AI track (DeFi category). This project bu
 - **Category**: DeFi
 - **Technical solution**: BSC (configurable RPC for testnet or mainnet)
 - **Environment config**: `.env.development` (no secrets)
-- **Smart contracts**: None custom; optional live execution uses existing BSC contracts via RPC
-- **Status**: TODO (set testnet/mainnet live status + date in `docs/submission.md`)
+- **Smart contracts**: `chain/contracts/DecisionLog.sol` deployed on BSC mainnet at `0x74B9CFd32552630B0bfEF0976Fc1d8198f830242`
+- **Status**: Live on BSC mainnet (2026-01-01)
 
 ## Project details
 AI-driven trading intelligence that combines on-chain signal retrieval, personalized risk profiling, and policy-gated execution planning. The system provides explainable recommendations, a deterministic execution plan, and a safety-first orchestration layer suitable for compliance-friendly automation.
@@ -41,6 +41,7 @@ Postgres + pgvector   BNB RPC (optional live exec)
 - sqlalchemy, psycopg, pgvector
 - pydantic, numpy, httpx
 - web3
+- hardhat, ethers
 
 ## Deployment instructions
 1. Copy and review `.env.development` (no secrets).
@@ -53,6 +54,17 @@ Postgres + pgvector   BNB RPC (optional live exec)
    uvicorn app.main:app --reload
    ```
 4. (Optional) Enable live execution on BSC by setting `RPC_URL`, `PRIVATE_KEY`, `EXECUTE_LIVE=true`, and `POLICY_MODE=execute_enabled`.
+
+## On-chain deployment (BSC testnet or mainnet)
+1. Install node deps (once): `npm install`
+2. Create `.env.hardhat` from `.env.hardhat.example` and set `DEPLOYER_PRIVATE_KEY` plus `BSC_TESTNET_RPC_URL` or `BSC_MAINNET_RPC_URL`.
+3. Compile: `npx hardhat compile`
+4. Deploy (testnet): `npx hardhat run chain/scripts/deploy.js --network bscTestnet`
+5. Deploy (mainnet): `npx hardhat run chain/scripts/deploy.js --network bscMainnet`
+6. Log two transactions (required by submission):  
+   `CONTRACT_ADDRESS=<DEPLOYED_CONTRACT> npx hardhat run chain/scripts/log-twice.js --network <bscTestnet|bscMainnet>`
+7. (Optional) Verify contract on BscScan:  
+   `BSCSCAN_API_KEY=<API_KEY> npx hardhat verify --network <bscTestnet|bscMainnet> <DEPLOYED_CONTRACT>`
 
 ## BNB Hack alignment
 
