@@ -1,5 +1,13 @@
 import os
 
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
+
+if load_dotenv:
+    load_dotenv(".env")
+    load_dotenv(".env.development")
 
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 VECTOR_DIM = int(os.getenv("VECTOR_DIM", "384"))
